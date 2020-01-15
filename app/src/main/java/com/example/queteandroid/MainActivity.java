@@ -1,12 +1,11 @@
 package com.example.queteandroid;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,17 +36,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
 //                diaplying une petite alert (Toast)
-                Context context = getApplicationContext();
+
 
                 lastname = (EditText) findViewById(R.id.editText1);
                 firstname = (EditText) findViewById(R.id.editText2);
 
+                Intent message = new Intent(MainActivity.this, HomeActivity.class);
+                message.putExtra("LASTNAME", lastname.getText().toString());
+                message.putExtra("FIRSTNAME", firstname.getText().toString());
+                startActivity(message);
 
-                CharSequence text = "Bonjour " + lastname.getText().toString()+ " " + firstname.getText().toString();
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
 
 
             }
