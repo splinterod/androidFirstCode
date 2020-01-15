@@ -1,7 +1,6 @@
 package com.example.queteandroid;
 
-import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -16,16 +15,14 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-        Intent intent = getIntent();
-        String lastname = intent.getStringExtra("FIRSTNAME");
-        String firstname = intent.getStringExtra("LASTNAME");
 
-        Context context = getApplicationContext();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        String lastname = pref.getString("lastname", null);
 
-        CharSequence text = "Bonjour " + lastname + " " + firstname;
+        CharSequence text = "Bonjour " + lastname + " " + lastname;
         int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT).show();
+
     }
 }

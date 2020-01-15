@@ -1,6 +1,7 @@
 package com.example.queteandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,10 +22,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        String lastname = pref.getString("lastname", null);
+
+        if (lastname != null) {
+            EditText edtText = (EditText) findViewById(R.id.editText2);
+            edtText.setText("Déja venu, " + lastname);
+        }
 
         addListenerOnButton();
 
+
     }
+
 
     public void addListenerOnButton() {
 
@@ -35,17 +45,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
 
-//                diaplying une petite alert (Toast)
-
 
                 lastname = (EditText) findViewById(R.id.editText1);
-                firstname = (EditText) findViewById(R.id.editText2);
+
+
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+
+                editor.putString("lastname", lastname.getText().toString()); // Storing boolean - true/false
+                editor.commit(); // commit changes
 
                 Intent message = new Intent(MainActivity.this, HomeActivity.class);
-                message.putExtra("LASTNAME", lastname.getText().toString());
-                message.putExtra("FIRSTNAME", firstname.getText().toString());
                 startActivity(message);
-
 
 
             }

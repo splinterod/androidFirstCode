@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">quete sur les MAD</string>
     <string name="Text1">Complete input and Send</string>
+    <string name="Text2">Premiere fois</string>
     <string name="button1">Send</string>
 
 
